@@ -841,6 +841,8 @@ github.com/nbio/st v0.0.0-20140626010706-e9e8d9816f32/go.mod h1:9wM+0iRr9ahx58uY
 github.com/ncw/swift v1.0.47/go.mod h1:23YIA4yWVnGwv2dQlN4bB7egfYX6YLn0Yo/S6zZO/ZM=
 github.com/ndemeshchenko/dnsmadeasy v0.0.0-20220105110642-f5ec9c39e519 h1:t/9LL0W3ingsfb9FBcZa/IaVGh9FgKc85+Cc1uLvd2w=
 github.com/ndemeshchenko/dnsmadeasy v0.0.0-20220105110642-f5ec9c39e519/go.mod h1:UxKaGuw5vLQ0lb5vulHYkk2AnHdfAw7KpzszBYSbDes=
+github.com/ndemeshchenko/dnsmadeasy v0.0.0-20220106150325-4d1d83b8a597 h1:4pIlTEC/25/FZ+z1E+QEVFXi+/wt5qZTYE9CiQH9zFQ=
+github.com/ndemeshchenko/dnsmadeasy v0.0.0-20220106150325-4d1d83b8a597/go.mod h1:UxKaGuw5vLQ0lb5vulHYkk2AnHdfAw7KpzszBYSbDes=
 github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e/go.mod h1:zD1mROLANZcx1PVRCS0qkT7pwLkGfwJo4zjcN/Tysno=
 github.com/nxadm/tail v1.4.4/go.mod h1:kenIhsEOeOJmVchQTgglprH7qJGnHDVpk1VPCcaMI8A=
 github.com/nxadm/tail v1.4.8 h1:nPr65rt6Y5JFSKQO7qToXr7pePgD6Gwiw05lkbyAQTE=

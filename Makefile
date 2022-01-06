@@ -42,10 +42,19 @@ clean-kubebuilder:
 build:
 	docker build -t "$(IMAGE_NAME):$(IMAGE_TAG)" .
 
+vendor:
+	go mod vendor
+
+lint: vendor
+	@sh -c "'$(CURDIR)/scripts/golangci_lint_check.sh'"
+
+unit-tests: vendor
+	@sh -c "'$(CURDIR)/scripts/unit_tests.sh'"
+
 .PHONY: rendered-manifest.yaml
 rendered-manifest.yaml:
 	helm template \
-	    --name example-webhook \
+	    --name cert-manager-webhook-dnsmadeasy \
         --set image.repository=$(IMAGE_NAME) \
         --set image.tag=$(IMAGE_TAG) \
-        deploy/example-webhook > "$(OUT)/rendered-manifest.yaml"
+        deploy/cert-manager-webhook-dnsmadeasy > "$(OUT)/rendered-manifest.yaml"

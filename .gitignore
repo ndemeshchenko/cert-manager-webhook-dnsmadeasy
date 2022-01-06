@@ -7,3 +7,5 @@ launch.json
 .vscode
 .idea
 default.etcd
+testdata/dnsmadeasy/apisecret.yaml
+cert-manager-webhook-dnsmadeasy
