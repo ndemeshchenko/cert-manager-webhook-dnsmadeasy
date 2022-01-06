@@ -1,0 +1,7 @@
+vendor
+_out
+_test
+db
+modules.xml
+launch.json
+.idea
