@@ -182,8 +182,8 @@ func (c *dnsmadeasyDNSProviderSolver) provider(cfg *dnsmadeasyDNSProviderConfig,
 		return nil, err
 	}
 
-	var keysec []string
-	for _, ref := range []certmanagerv1.SecretKeySelector{cfg.APIKeyRef, cfg.APISecretRef} {
+	keysec := make(map[string]string)
+	for key, ref := range map[string]certmanagerv1.SecretKeySelector{"APIKeyRef": cfg.APIKeyRef, "APISecretRef": cfg.APISecretRef} {
 		secret, err := c.client.CoreV1().
 			Secrets(namespace).
 			Get(context.Background(), ref.Name, metaV1.GetOptions{})
@@ -194,15 +194,16 @@ func (c *dnsmadeasyDNSProviderSolver) provider(cfg *dnsmadeasyDNSProviderConfig,
 
 		secretBytes, ok := secret.Data[ref.Key]
 		if !ok {
-			return nil, fmt.Errorf("no apiKeyRef for %q in secret '%s/%s'", ref.Name, ref.Key, namespace)
+			return nil, fmt.Errorf("no %s for %q in secret '%s/%s'", key, ref.Name, namespace, ref.Key)
 		}
-		keysec = append(keysec, string(secretBytes))
+
+		keysec[key] = string(secretBytes)
 
 	}
 
 	providerConfig, err := dnsmadeasy.New(&dnsmadeasy.DMEClient{
-		APIAccessKey: keysec[0],
-		APISecretKey: keysec[1],
+		APIAccessKey: keysec["APIKeyRef"],
+		APISecretKey: keysec["APISecretRef"],
 	})
 
 	if err != nil {
