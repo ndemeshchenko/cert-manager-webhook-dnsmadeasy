@@ -4,4 +4,6 @@ _test
 db
 modules.xml
 launch.json
+.vscode
 .idea
+default.etcd
