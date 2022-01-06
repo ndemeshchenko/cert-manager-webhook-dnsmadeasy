@@ -119,7 +119,6 @@ func (c *dnsmadeasyDNSProviderSolver) Present(ch *v1alpha1.ChallengeRequest) err
 }
 
 func (c *dnsmadeasyDNSProviderSolver) CleanUp(ch *v1alpha1.ChallengeRequest) error {
-	// TODO
 	fmt.Printf("\n>>>CleanUp(): fqdn:[%s] zone:[%s]\n", ch.ResolvedFQDN, ch.ResolvedZone)
 	cfg, err := loadConfig(ch.Config)
 	if err != nil {
