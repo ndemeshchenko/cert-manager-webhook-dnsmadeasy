@@ -49,10 +49,21 @@ metadata:
 spec:
   acme:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
-    email: certmaster@dnsmadeasy.com
+    email: certmaster@example.com
     privateKeySecretRef:
       name: letsencrypt-staging-account-key
-    todo:
+    solvers:
+    - dns01:
+        webhook:
+          groupName: acme.example.com
+          solverName: dnsmadeasy
+          config:
+            apiKeyRef:
+              name: dnsmadeasy-secret
+              key: key
+            apiSecretRef:
+              name: dnsmadeasy-secret
+              key: secret
 ```
 
 ## Development
