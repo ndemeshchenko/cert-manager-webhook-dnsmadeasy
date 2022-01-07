@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"k8s.io/klog/v2"
 	"os"
 	"strings"
 
@@ -64,7 +65,7 @@ func (c *dnsmadeasyDNSProviderSolver) Name() string {
 }
 
 func (c *dnsmadeasyDNSProviderSolver) Present(ch *v1alpha1.ChallengeRequest) error {
-	fmt.Printf("\n>>>Present: fqdn:[%s] zone:[%s]\n", ch.ResolvedFQDN, ch.ResolvedZone)
+	klog.Infof("\nIn Present: fqdn:[%s] zone:[%s]\n", ch.ResolvedFQDN, ch.ResolvedZone)
 
 	cfg, err := loadConfig(ch.Config)
 	if err != nil {
@@ -114,12 +115,12 @@ func (c *dnsmadeasyDNSProviderSolver) Present(ch *v1alpha1.ChallengeRequest) err
 		}
 	}
 
-	fmt.Printf("\n<<<Present: fqdn:[%s] zone:[%s]\n", ch.ResolvedFQDN, ch.ResolvedZone)
+	klog.Infof("\nOut Present: fqdn:[%s] zone:[%s]\n", ch.ResolvedFQDN, ch.ResolvedZone)
 	return nil
 }
 
 func (c *dnsmadeasyDNSProviderSolver) CleanUp(ch *v1alpha1.ChallengeRequest) error {
-	fmt.Printf("\n>>>CleanUp(): fqdn:[%s] zone:[%s]\n", ch.ResolvedFQDN, ch.ResolvedZone)
+	klog.Infof("\nIn CleanUp(): fqdn:[%s] zone:[%s]\n", ch.ResolvedFQDN, ch.ResolvedZone)
 	cfg, err := loadConfig(ch.Config)
 	if err != nil {
 		printError(err)
@@ -247,7 +248,7 @@ func findTXTRecord(client *dnsmadeasy.DMEClient, domainID int, zone, fqdn, key s
 
 	for _, record := range records {
 		if record.Name == name && record.Type == "TXT" && trimQuotes(record.Value) == key {
-			fmt.Printf("DNS record found %v\n", record)
+			klog.Infof("DNS record found %v\n", record)
 			return &record, nil
 		}
 	}
@@ -293,5 +294,5 @@ func loadConfig(cfgJSON *extAPI.JSON) (dnsmadeasyDNSProviderConfig, error) {
 }
 
 func printError(err error) {
-	fmt.Printf("\n\nERROR\n %v \n\n", err)
+	klog.Errorf("\n\nERROR\n %v \n\n", err)
 }
