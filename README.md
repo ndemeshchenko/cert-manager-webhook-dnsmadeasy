@@ -1,6 +1,7 @@
 # cert-manager-webhook-dnsmadeasy
 
-Cert-manager ACME DNS01 challenge wehook provider for DNS Made Easy.
+Cert-manager ACME DNS01 challenge webhook provider for DNS Made Easy.
+DNSMadeEasy api wrapper used in this webhook - https://github.com/ndemeshchenko/dnsmadeasy
 
 ## Installing
 
