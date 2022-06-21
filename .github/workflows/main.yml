@@ -62,3 +62,7 @@ jobs:
 
     outputs:
       tag_commit: ${{ steps.update_image.outputs.commit }}
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v2
