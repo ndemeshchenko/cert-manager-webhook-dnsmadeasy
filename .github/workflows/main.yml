@@ -94,6 +94,6 @@ jobs:
           target: image
           push: true
           build-args: GO_VERSION=${{ needs.base.outputs.go_version }}
-          tags: bwolf/cert-manager-webhook-dnsmadeasy:latest,bwolf/cert-manager-webhook-dnsmadeasy:${{ needs.base.outputs.build_version }}
+          tags: ndemeshchenko/cert-manager-webhook-dnsmadeasy:latest,ndemeshchenko/cert-manager-webhook-dnsmadeasy:${{ needs.base.outputs.build_version }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
