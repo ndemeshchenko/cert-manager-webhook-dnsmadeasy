@@ -12,10 +12,9 @@ GO_VERSION ?= $(shell go mod edit -json | grep -${GREP_PREGEX_FLAG}o '"Go":\s+"(
 IMAGE_NAME := "ndemeshchenko/cert-manager-webhook-dnsmadeasy"
 IMAGE_TAG := "latest"
 
-K8S_VERSION=1.21.2
-
 OUT := $(shell pwd)/_out
 
+K8S_VERSION=1.21.2
 KUBEBUILDER_VERSION=2.3.2
 
 $(shell mkdir -p "$(OUT)")
@@ -40,10 +39,11 @@ clean-kubebuilder:
 	rm -Rf _test/kubebuilder
 
 build:
-	docker build -t "$(IMAGE_NAME):$(IMAGE_TAG)" .
+	docker buildx build --target=image --platform=linux/amd64 --output=type=docker,name=${IMAGE_NAME}:${IMAGE_TAG} --tag=${IMAGE_NAME}:latest --build-arg=GO_VERSION=${GO_VERSION} .
 
-vendor:
-	go mod vendor
+package:
+	helm package deploy/cert-manager-webhook-dnsmadeasy -d charts/
+	helm repo index charts/ --url https://ndemeshchenko.github.io/cert-manager-webhook-dnsmadeasy
 
 lint: vendor
 	@sh -c "'$(CURDIR)/scripts/golangci_lint_check.sh'"
