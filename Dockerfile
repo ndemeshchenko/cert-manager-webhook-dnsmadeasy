@@ -1,22 +1,26 @@
-FROM golang:1.17.5-alpine AS build
-RUN apk add --no-cache git
-WORKDIR /workspace
-ENV GO111MODULE=on
+# syntax=docker/dockerfile:1.3
+ARG GO_VERSION
+FROM --platform=${TARGETPLATFORM} golang:${GO_VERSION}-alpine AS base
 
-COPY scripts scripts
-COPY testdata testdata
-# RUN ./scripts/fetch-test-binaries.sh
-COPY go.mod .
-COPY go.sum .
-COPY main.go .
-COPY main_test.go .
+WORKDIR /go/src/cert-manager-webhook-dnsmadeasy
+COPY go.* .
+# ENV GO111MODULE=on
 
-RUN ls -la
-RUN go mod download
-RUN CGO_ENABLED=0 go build -o webhook -ldflags '-w -extldflags "-static"' .
+RUN --mount=type=cache,target=/go/pkg/mod \
+    apk add --no-cache git ca-certificates && \
+    go mod download
+
+FROM base AS build
+ARG TARGETOS
+ARG TARGETARCH
+
+RUN --mount=readonly,target=. --mount=type=cache,target=/go/pkg/mod \
+    GOOS=${TARGETOS} GOARCH=${TARGETARCH} CGO_ENABLED=0 go build -a -o /go/bin/webhook -ldflags '-w -extldflags "-static"' .
 
 # ------------------------------
-FROM alpine:3.14.2
-RUN apk add --no-cache ca-certificates
-COPY --from=build /workspace/webhook /usr/local/bin/webhook
-ENTRYPOINT ["webhook"]
+
+FROM scratch AS image
+COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=build /go/bin/webhook /usr/local/bin/webhook
+
+ENTRYPOINT ["/usr/local/bin/webhook"]
