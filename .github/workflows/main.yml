@@ -1,0 +1,64 @@
+
+name: CI
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+      - '!v0.1.*'
+
+jobs:
+  base:
+    runs-on: ubuntu-latest
+
+    outputs:
+      go_version: ${{ steps.get_versions.outputs.go_version }}
+      build_version: ${{ steps.get_versions.outputs.build_version }}
+      chart_version: ${{ steps.get_versions.outputs.chart_version }}
+      go_updated: ${{ steps.file_updates.outputs.go }}
+      yaml_updated: ${{ steps.file_updates.outputs.yaml }}
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Get versions
+        id: get_versions
+        run: |
+          echo ::set-output name=go_version::$(go mod edit -json | grep -Po '"Go":\s+"([0-9.]+)"' | sed -E 's/.+"([0-9.]+)"/\1/')
+          echo ::set-output name=build_version::${GITHUB_REF#refs/tags/v}
+          echo ::set-output name=chart_version::${GITHUB_REF#refs/tags/}
+
+      - name: Get last release
+        id: last_release
+        shell: bash
+        run: |
+          tag=$(gh release list | sed -n '1 p' | awk '{print $(NF -1);}')
+          sha=$(git show-ref --tags | grep $tag | awk '{print $1;}')
+          echo ::set-output name=sha::$sha
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check updated files
+        id: file_updates
+        uses: dorny/paths-filter@v2
+        with:
+          base: ${{ steps.last_release.outputs.sha }}
+          filters: |
+            go:
+              - '*.go'
+              - 'go.*'
+            yaml:
+              - 'deploy/cert-manager-webhook-dnsmadeasy/*.yaml'
+              - 'deploy/cert-manager-webhook-dnsmadeasy/templates/*.yaml'
+
+  build:
+    needs: base
+    if: ${{ needs.base.outputs.go_updated == 'true' }}
+
+    runs-on: ubuntu-latest
+
+    outputs:
+      tag_commit: ${{ steps.update_image.outputs.commit }}

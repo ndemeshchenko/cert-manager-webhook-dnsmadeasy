@@ -9,3 +9,4 @@ launch.json
 default.etcd
 testdata/dnsmadeasy/apisecret.yaml
 cert-manager-webhook-dnsmadeasy
+example_template.yaml
