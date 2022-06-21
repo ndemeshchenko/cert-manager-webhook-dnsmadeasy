@@ -5,9 +5,10 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"k8s.io/klog/v2"
 	"os"
 	"strings"
+
+	"k8s.io/klog/v2"
 
 	"github.com/jetstack/cert-manager/pkg/acme/webhook/apis/acme/v1alpha1"
 	"github.com/jetstack/cert-manager/pkg/acme/webhook/cmd"
@@ -293,6 +294,7 @@ func loadConfig(cfgJSON *extAPI.JSON) (dnsmadeasyDNSProviderConfig, error) {
 	return cfg, nil
 }
 
+// printError
 func printError(err error) {
 	klog.Errorf("\n\nERROR\n %v \n\n", err)
 }
