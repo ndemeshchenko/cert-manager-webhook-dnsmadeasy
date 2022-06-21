@@ -294,7 +294,6 @@ func loadConfig(cfgJSON *extAPI.JSON) (dnsmadeasyDNSProviderConfig, error) {
 	return cfg, nil
 }
 
-// printError func
 func printError(err error) {
 	klog.Errorf("\n\nERROR\n %v \n\n", err)
 }
