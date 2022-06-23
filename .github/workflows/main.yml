@@ -97,6 +97,24 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
 
+      # Temp fix
+      # https://github.com/docker/build-push-action/issues/252
+      # https://github.com/moby/buildkit/issues/1896
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+      - name: Update Helm image tag
+        id: update_image
+        uses: fjogeleit/yaml-update-action@master
+        with:
+          valueFile: 'deploy/cert-manager-webhook-gandi/values.yaml'
+          propertyPath: 'image.tag'
+          value: ${{ needs.base.outputs.build_version }}
+          message: 'Update image tag to ${{ needs.base.outputs.build_version }}'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   release:
     needs:
       - base
