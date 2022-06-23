@@ -107,7 +107,7 @@ jobs:
 
       - name: Update Helm image tag
         id: update_image
-        uses: fjogeleit/yaml-update-action@master
+        uses: fjogeleit/yaml-update-action@main
         with:
           valueFile: 'deploy/cert-manager-webhook-dnsmadeasy/values.yaml'
           propertyPath: 'image.tag'
