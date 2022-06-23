@@ -8,9 +8,9 @@ DNSMadeEasy api wrapper used in this webhook - https://github.com/ndemeshchenko/
 To install with helm, run:
 
 ```bash
-$ helm repo add dnsmadeasy https://ndemeshchenko.github.io/cert-manager-webhook-dnsmadeeasy
+$ helm repo add dnsmadeasy https://ndemeshchenko.github.io/cert-manager-webhook-dnsmadeasy
 $ helm repo update
-$ helm install --name cert-manager-webhook-dnsmadeeasy ndemeshchenko/cert-manager-webhook-dnsmadeeasy
+$ helm install --name cert-manager-webhook-dnsmadeasy ndemeshchenko/cert-manager-webhook-dnsmadeasy
 ```
 
 or
@@ -18,7 +18,7 @@ or
 ```bash
 $ git clone $thisRepo
 $ cd $thisRepoPath
-$ helm install --name cert-manager-webhook-dnsmadeeasy .
+$ helm install --name cert-manager-webhook-dnsmadeasy .
 ```
 
 without helm, run:
