@@ -56,7 +56,7 @@ jobs:
 
   build:
     needs: base
-    if: ${{ needs.base.outputs.go_updated == 'true' }}
+    # if: ${{ needs.base.outputs.go_updated == 'true' }}
 
     runs-on: ubuntu-latest
 
