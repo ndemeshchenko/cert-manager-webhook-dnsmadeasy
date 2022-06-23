@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "cert-manager-webhook-dnsmadeasy.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ include "cert-manager-webhook-dnsmadeasy.name" . }}
+    chart: {{ include "cert-manager-webhook-dnsmadeasy.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: https
+      protocol: TCP
+      name: https
+  selector:
+    app: {{ include "cert-manager-webhook-dnsmadeasy.name" . }}
+    release: {{ .Release.Name }}
