@@ -4,7 +4,7 @@ certManager:
   serviceAccountName: cert-manager
 image:
   repository: ndemeshchenko/cert-manager-webhook-dnsmadeasy
-  tag: 0.0.1
+  tag: 0.0.3
   pullPolicy: IfNotPresent
 features:
   apiPriorityAndFairness: false
