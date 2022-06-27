@@ -18,7 +18,7 @@ or
 ```bash
 $ git clone $thisRepo
 $ cd $thisRepoPath
-$ helm install --name cert-manager-webhook-dnsmadeasy .
+$ helm install cert-manager-webhook-dnsmadeasy .
 ```
 
 without helm, run:
