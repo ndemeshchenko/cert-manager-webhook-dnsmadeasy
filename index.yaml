@@ -4,7 +4,7 @@ entries:
   - apiVersion: v2
     created: "2022-06-23T10:28:18.867304845Z"
     description: A Helm chart for cert-manager-webhook-dnsmadeasy
-    digest: 243db4f378a222997b90baa1a00df271af487e60d61967b4d26d2648092dc66a
+    digest: 87fb23ae935a46255bc8956378a2e1aecccd255f7e9415c333003f6e07809bc0
     name: cert-manager-webhook-dnsmadeasy
     urls:
     - https://github.com/ndemeshchenko/cert-manager-webhook-dnsmadeasy/releases/download/v0.3.0/cert-manager-webhook-dnsmadeasy-v0.3.0.tgz
