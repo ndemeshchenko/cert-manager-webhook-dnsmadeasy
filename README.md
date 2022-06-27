@@ -10,7 +10,7 @@ To install with helm, run:
 ```bash
 $ helm repo add dnsmadeasy https://ndemeshchenko.github.io/cert-manager-webhook-dnsmadeasy
 $ helm repo update
-$ helm install cert-manager-webhook-dnsmadeasy ndemeshchenko/cert-manager-webhook-dnsmadeasy
+$ helm install cert-manager-webhook-dnsmadeasy dnsmadeasy/cert-manager-webhook-dnsmadeasy
 ```
 
 or
