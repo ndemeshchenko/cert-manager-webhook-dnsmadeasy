@@ -7,6 +7,6 @@ entries:
     digest: 87fb23ae935a46255bc8956378a2e1aecccd255f7e9415c333003f6e07809bc0
     name: cert-manager-webhook-dnsmadeasy
     urls:
-    - https://github.com/ndemeshchenko/cert-manager-webhook-dnsmadeasy/releases/download/v0.3.0/cert-manager-webhook-dnsmadeasy-v0.3.0.tgz
-    version: v0.3.0
+    - https://github.com/ndemeshchenko/cert-manager-webhook-dnsmadeasy/releases/download/v0.0.3/cert-manager-webhook-dnsmadeasy-v0.0.3.tgz
+    version: v0.0.3
 generated: "2022-06-23T10:28:18.867304845Z"
