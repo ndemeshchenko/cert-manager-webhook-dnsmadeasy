@@ -21,6 +21,9 @@ spec:
         release: {{ .Release.Name }}
     spec:
       serviceAccountName: {{ include "cert-manager-webhook-dnsmadeasy.fullname" . }}
+      {{- if .Values.hostNetwork }}
+      hostNetwork: true
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
