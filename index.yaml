@@ -2,6 +2,14 @@ apiVersion: v1
 entries:
   cert-manager-webhook-dnsmadeasy:
   - apiVersion: v2
+    created: "2024-01-15T14:11:05.145869698Z"
+    description: DNSMadeEasy cert-manager ACME webhook
+    digest: db220b61e798187b34f5c853a874d6923aee3359f96c9bbdee0af51679d2a51b
+    name: cert-manager-webhook-dnsmadeasy
+    urls:
+    - https://github.com/ndemeshchenko/cert-manager-webhook-dnsmadeasy/releases/download/v0.0.5/cert-manager-webhook-dnsmadeasy-v0.0.5.tgz
+    version: v0.0.5
+  - apiVersion: v2
     created: "2022-07-04T12:59:05.966653828Z"
     description: DNSMadeEasy cert-manager ACME webhook
     digest: 95e9f933fdf584347211c4a923090c5db871270adda4462afd8dae4bcd24c015
@@ -17,4 +25,4 @@ entries:
     urls:
     - https://github.com/ndemeshchenko/cert-manager-webhook-dnsmadeasy/releases/download/v0.0.3/cert-manager-webhook-dnsmadeasy-v0.0.3.tgz
     version: v0.0.3
-generated: "2022-07-04T12:59:05.966666629Z"
+generated: "2024-01-15T14:11:05.145885848Z"
